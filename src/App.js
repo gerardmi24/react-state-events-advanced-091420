@@ -14,7 +14,7 @@ class App extends Component {
   addFavorites = (id) => {
     let newBeyArray = [...this.state.beyArray];
     let findBey = newBeyArray.find(el => el.id === id);
-    findBey.favorite = true
+    findBey.favorite = true;
     this.setState({
       beyArray: newBeyArray
     })
@@ -31,15 +31,18 @@ class App extends Component {
   }
 
   findFavs = () => {
+    // console.log(this.state.beyArray)
     return this.state.beyArray.filter(el => el.favorite)
   }
 
   render() {
+    // console.log(this.findFavs())
     // console.log(this.addFavorites)
+    // console.log(this.state.beyArray)
     return (
       <div className="container">
-        <BeyContainer allBeys={this.state.beyArray} clickHandler={this.addFavorites} />
-        <Favorites allBeys={this.findFavs()} clickHandler={this.removeFavs} />
+        <BeyContainer beyArray={this.state.beyArray} clickHandler={this.addFavorites} />
+        <Favorites beyArray={this.findFavs()} clickHandler={this.removeFavs} />
       </div>
     )
   }
