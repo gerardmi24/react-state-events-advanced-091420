@@ -8,15 +8,38 @@ import beyArray from './api.js';
 class App extends Component {
 
   state = {
-    beyArray: beyArray
+    beyArray
+  }
+
+  addFavorites = (id) => {
+    let newBeyArray = [...this.state.beyArray];
+    let findBey = newBeyArray.find(el => el.id === id);
+    findBey.favorite = true
+    this.setState({
+      beyArray: newBeyArray
+    })
+  }
+
+  removeFavs = (id) => {
+    let newBeyArray = [...this.state.beyArray];
+    let findBey = newBeyArray.find(el => el.id === id);
+    findBey.favorite = false
+    this.setState({
+      beyArray: newBeyArray
+    })
+    window.alert("Hot sauce swag")
+  }
+
+  findFavs = () => {
+    return this.state.beyArray.filter(el => el.favorite)
   }
 
   render() {
-    // console.log(this.state.beyArray)
+    // console.log(this.addFavorites)
     return (
       <div className="container">
-        <BeyContainer allBeys={this.state.beyArray} />
-        <Favorites />
+        <BeyContainer allBeys={this.state.beyArray} clickHandler={this.addFavorites} />
+        <Favorites allBeys={this.findFavs()} clickHandler={this.removeFavs} />
       </div>
     )
   }
